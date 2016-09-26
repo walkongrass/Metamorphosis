@@ -85,7 +85,7 @@ public class FetchRequest implements Delayed {
     public void increaseMaxSize() {
         if (this.maxSize > MessageUtils.MAX_READ_BUFFER_SIZE) {
             log.warn("警告：maxSize超过最大限制" + MessageUtils.MAX_READ_BUFFER_SIZE
-                + "Bytes，请设置环境变量-Dnotify.remoting.max_read_buffer_size超过此限制");
+                + "Bytes，请设置环境变量-Dnotify.remoting.max_read_buffer_size超过此限制,max buffer size:"+MessageUtils.MAX_READ_BUFFER_SIZE+" Bytes");
             return;
         }
         this.maxSize = 2 * this.maxSize;
