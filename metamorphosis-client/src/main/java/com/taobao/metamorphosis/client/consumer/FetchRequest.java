@@ -83,17 +83,20 @@ public class FetchRequest implements Delayed {
 
 
     public void increaseMaxSize() {
+    	log.info("Max read buffer size:"+MessageUtils.MAX_READ_BUFFER_SIZE+",origin max size:"+this.originalMaxSize);
         if (this.maxSize > MessageUtils.MAX_READ_BUFFER_SIZE) {
             log.warn("警告：maxSize超过最大限制" + MessageUtils.MAX_READ_BUFFER_SIZE
                 + "Bytes，请设置环境变量-Dnotify.remoting.max_read_buffer_size超过此限制,max buffer size:"+MessageUtils.MAX_READ_BUFFER_SIZE+" Bytes");
             //return;
         }
+        log.warn("Origin size:"+this.maxSize+" Bytes");
         this.maxSize = 2 * this.maxSize;
-        log.warn("Increse size to :"+this.maxSize+"Bytes.");
+        log.warn("Increase size to :"+this.maxSize+" Bytes.");
     }
 
 
     public void decreaseMaxSize() {
+    	log.info("Ready to decrease MaxSize :"+this.maxSize+" , Origin size:"+this.maxSize+" Bytes");
         if (this.maxSize < this.originalMaxSize) {
             this.maxSize = this.originalMaxSize;
         }
@@ -103,6 +106,7 @@ public class FetchRequest implements Delayed {
         else {
             this.maxSize = this.maxSize / 2;
         }
+        log.info("Finnally decrease MaxSize :"+this.maxSize);
     }
 
 

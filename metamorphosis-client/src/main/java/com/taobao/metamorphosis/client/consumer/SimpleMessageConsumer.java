@@ -341,7 +341,9 @@ public class SimpleMessageConsumer implements MessageConsumer, InnerConsumer {
                 final DataCommand dataCmd = (DataCommand) response;
                 final byte[] data = dataCmd.getData();
                 // 获取的数据严重不足的时候，缩减maxSize
+                log.info("Data Length:"+data.length+", FetchRequest max size:"+fetchRequest.getMaxSize());
                 if (data.length < fetchRequest.getMaxSize() / 2) {
+                	
                     fetchRequest.decreaseMaxSize();
                 }
                 success = true;
